@@ -15,7 +15,7 @@ export default function Registro() {
     setError("");
     setExito("");
     try {
-      await api.post("/auth/registro", { nombre, email, contraseña });
+      await api.post("/auth/registro", { nombre, email, password });
       setExito("Registro exitoso, ¡puedes iniciar sesión!");
       setTimeout(() => navigate("/login"), 1500);
     } catch (err) {
