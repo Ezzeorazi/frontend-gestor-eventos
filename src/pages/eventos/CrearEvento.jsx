@@ -1,25 +1,8 @@
 import React, { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/axios";
+import FloatInput from "../../components/FloatInput";
 
-/** Input con label flotante (mismo estilo que login/registro) */
-const FloatInput = ({ id, type="text", value, onChange, label, required, placeholder=" " }) => (
-  <label htmlFor={id} className="relative block">
-    <input
-      id={id}
-      type={type}
-      value={value}
-      onChange={onChange}
-      required={required}
-      placeholder={placeholder}
-      autoComplete="off"
-      className="peer w-full rounded border border-gray-300 px-3 pt-5 pb-2 shadow-sm focus:border-blue-600 focus:outline-none sm:text-sm"
-    />
-    <span className="pointer-events-none absolute left-3 top-1 text-sm text-gray-700 transition-all duration-200 peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-sm px-1">
-      {label}
-    </span>
-  </label>
-);
 
 export default function CrearEvento() {
   const navigate = useNavigate();
