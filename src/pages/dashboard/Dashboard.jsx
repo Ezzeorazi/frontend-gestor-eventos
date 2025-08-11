@@ -58,7 +58,7 @@ const Empty = ({ onCreate }) => (
 /** Cabecera minimal con CTA */
 const Topbar = ({ onCreate }) => (
   <header className="sticky top-0 z-10 border-b border-gray-200 bg-white/80 backdrop-blur">
-    <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+    <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
       <div className="flex items-center gap-2">
         <div className="h-7 w-7 rounded-lg bg-blue-600" />
         <span className="text-lg font-semibold text-gray-900">Invita</span>
@@ -67,14 +67,13 @@ const Topbar = ({ onCreate }) => (
         <button onClick={onCreate} className="rounded-lg bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-700">
           Crear invitación
         </button>
+        <button
+          onClick={() => { localStorage.removeItem("token"); window.location.href = "/login"; }}
+          className="rounded-lg border px-3 py-2 text-sm text-gray-700 hover:bg-gray-50"
+        >
+          Salir
+        </button>
       </div>
-      <button
-        onClick={() => { localStorage.removeItem("token"); window.location.href = "/login"; }}
-        className="rounded-lg border px-3 py-2 text-sm text-gray-700 hover:bg-gray-50"
-      >
-        Salir
-      </button>
-
     </div>
   </header>
 );
@@ -104,7 +103,7 @@ export default function Dashboard() {
         setLoading(false);
       }
     })();
-  }, []);
+  }, [navigate, token]);
 
   useEffect(() => {
     if (!seleccion?._id) return;
@@ -124,7 +123,7 @@ export default function Dashboard() {
         console.error("No se pudieron cargar invitaciones del evento", e);
       }
     })();
-  }, [seleccion?._id]);
+  }, [seleccion?._id, seleccion?.invitaciones]);
 
 
   // métricas
