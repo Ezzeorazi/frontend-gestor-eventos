@@ -1,41 +1,26 @@
-// src/pages/invitaciones/Invitar.jsx
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../../services/axios";
+import FloatInput from "../../components/FloatInput";
 
 const Row = ({ i, value, onChange, onRemove }) => (
   <div className="grid grid-cols-1 gap-3 md:grid-cols-5">
-    {/* Nombre (solo UI, hoy no se envía al backend) */}
-    <label className="relative block md:col-span-2">
-      <input
-        type="text"
-        value={value.nombre || ""}
-        onChange={(e) => onChange(i, { ...value, nombre: e.target.value })}
-        className="peer w-full rounded border border-gray-300 px-3 pt-5 pb-2 shadow-sm focus:border-blue-600 focus:outline-none sm:text-sm"
-        placeholder=" "
-        autoComplete="off"
-      />
-      <span className="pointer-events-none absolute left-3 top-1 text-sm text-gray-700 transition-all duration-200 peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-sm px-1">
-        Nombre (opcional)
-      </span>
-    </label>
-
-    {/* Email (requerido y lo que realmente envía el backend) */}
-    <label className="relative block md:col-span-3">
-      <input
-        type="email"
-        value={value.email}
-        onChange={(e) => onChange(i, { ...value, email: e.target.value })}
-        required
-        className="peer w-full rounded border border-gray-300 px-3 pt-5 pb-2 shadow-sm focus:border-blue-600 focus:outline-none sm:text-sm"
-        placeholder=" "
-        autoComplete="off"
-      />
-      <span className="pointer-events-none absolute left-3 top-1 text-sm text-gray-700 transition-all duration-200 peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-sm px-1">
-        Email
-      </span>
-    </label>
-
+    <FloatInput
+      id={`nombre-${i}`}
+      value={value.nombre || ""}
+      onChange={(e) => onChange(i, { ...value, nombre: e.target.value })}
+      label="Nombre (opcional)"
+      className="md:col-span-2"
+    />
+    <FloatInput
+      id={`email-${i}`}
+      type="email"
+      value={value.email}
+      onChange={(e) => onChange(i, { ...value, email: e.target.value })}
+      label="Email"
+      required
+      className="md:col-span-3"
+    />
     <button
       type="button"
       onClick={() => onRemove(i)}
