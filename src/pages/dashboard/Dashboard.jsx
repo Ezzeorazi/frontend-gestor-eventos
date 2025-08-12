@@ -33,13 +33,17 @@ const InviteRow = ({ invite }) => (
       <StatusPill value={invite.estado} />
     </td>
     <td className="py-3 text-right">
-      <a
-        href={invite.token ? `${window.location.origin}/invitaciones/responder/${invite.token}` : "#"}
-        className="text-sm text-blue-600 hover:underline"
-        target="_blank" rel="noreferrer"
-      >
-        Ver enlace
-      </a>
+      {invite.token ? (
+        <a
+          href={`${window.location.origin}/invitaciones/responder/${invite.token}`}
+          className="text-sm text-blue-600 hover:underline"
+          target="_blank" rel="noreferrer"
+        >
+          Ver enlace
+        </a>
+      ) : (
+        <span className="text-sm text-gray-400">Sin enlace</span>
+      )}
     </td>
   </tr>
 );
