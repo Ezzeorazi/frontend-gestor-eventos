@@ -112,18 +112,20 @@ export default function Dashboard() {
 
     (async () => {
       try {
-        const { data } = await api.get(`/eventos/${seleccion._id}/invitaciones`);
+        const { data } = await api.get(`/eventos/${seleccion._id}/invitaciones`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         // setear en 'seleccion'
-        setSeleccion(prev => ({ ...prev, invitaciones: data || [] }));
+        setSeleccion((prev) => ({ ...prev, invitaciones: data || [] }));
         // opcional: sincronizar también en 'eventos'
-        setEventos(prev =>
-          prev.map(ev => ev._id === seleccion._id ? { ...ev, invitaciones: data || [] } : ev)
+        setEventos((prev) =>
+          prev.map((ev) => (ev._id === seleccion._id ? { ...ev, invitaciones: data || [] } : ev))
         );
       } catch (e) {
         console.error("No se pudieron cargar invitaciones del evento", e);
       }
     })();
-  }, [seleccion?._id, seleccion?.invitaciones]);
+  }, [seleccion?._id, seleccion?.invitaciones, token]);
 
 
   // métricas
