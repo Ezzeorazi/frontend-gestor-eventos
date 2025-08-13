@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import api from "../../services/axios";
 import { useNavigate } from "react-router-dom";
+import AssistantPanel from "../../components/assistant/AssistantPanel.jsx";
 
 /** Pills de estado RSVP */
 const StatusPill = ({ value }) => {
@@ -267,6 +268,7 @@ export default function Dashboard() {
           </div>
         )}
       </main>
+      <AssistantPanel />
     </div>
   );
 }
